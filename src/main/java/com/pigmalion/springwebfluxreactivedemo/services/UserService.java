@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Random;
+
 
 @Service
 public class UserService {
 
-    @Autowired
-    IUserRepository userRepository;
+   @Autowired
+   IUserRepository userRepository;
 
     public Flux<User> getAll () {
         return userRepository.findAll();
@@ -23,7 +25,9 @@ public class UserService {
     }
 
     public Mono<User> create (User user) {
-        return userRepository.save(user);
+       // Fix for non auto-incremental id generated
+       Long id = new Random().nextLong();
+       return userRepository.save(id, user.getName());
     }
 
 }

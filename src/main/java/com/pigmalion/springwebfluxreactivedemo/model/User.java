@@ -1,19 +1,15 @@
 package com.pigmalion.springwebfluxreactivedemo.model;
 
-import org.hibernate.annotations.Proxy;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 
-@Entity
-@Table(name = "users")
-@Proxy(lazy=false)
+import javax.annotation.Generated;
+
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
     public Long getId() {
