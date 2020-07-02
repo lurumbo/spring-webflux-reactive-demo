@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 
 @Service
 public class UserService {
@@ -16,18 +15,15 @@ public class UserService {
     IUserRepository userRepository;
 
     public Flux<User> getAll () {
-        List<User> users = userRepository.findAll();
-        return Flux.fromIterable(users);
+        return userRepository.findAll();
     }
 
     public Mono<User> getById (Long id) {
-        User user = userRepository.getOne(id);
-        return Mono.just(user);
+        return userRepository.findById(id);
     }
 
     public Mono<User> create (User user) {
-        User dbUser = userRepository.save(user);
-        return Mono.just(dbUser);
+        return userRepository.save(user);
     }
 
 }
